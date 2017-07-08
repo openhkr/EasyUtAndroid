@@ -1,0 +1,13 @@
+{
+  "status": 100,
+  "desc": "",
+  "data": {
+    "temperature": 0.00,
+    "weatherType": 0,
+    "ultraviolet": 0,
+    "rainfall": 30,
+    "hourTemperature": "",
+    "precipitation": "",
+    "windPower": ""
+  }
+}

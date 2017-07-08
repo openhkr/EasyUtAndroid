@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EasyUtAndroid</string>
+    <string name="weather_empty"> </string>
+    <string name="weather_location">沈阳</string>
+    <string name="weather_sunny">晴天</string>
+    <string name="weather_rainy">雨天</string>
+    <string name="weather_cloudy">多云</string>
+    <string name="weather_light_bask">紫外线指数良好</string>
+    <string name="weather_middle_bask">太阳眼镜,尽量躲在阴凉处</string>
+    <string name="weather_high_bask">长袖衣物,上午十时至下午二时最好不要外出</string>
+    <string name="weather_danger_bask">紫外线指数过高，不建议出行</string>
+    <string name="weather_data_error">数据转换异常</string>
+
+
+</resources>
