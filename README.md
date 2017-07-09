@@ -32,3 +32,54 @@
 
 
 
+问题反馈回执：
+   感谢Jaggerer同学的反馈，为了响应谷歌kotlin第一开发言语的号召，同时也因为java8 Optional需要api 24以致无法广泛推广等原因，工程中对数据判空类
+WeatherDataConvert参与了kontlin编写，愿意尝试kontlin的同学可以使用Android Studio下载Kotlin相关插件
+   执行 Settings -> plugins -> BrowseRepositories中搜索“Kotlin”
+   暂时还不愿意下载插件的同学可以将WeatherDataConvert转成java文件以使用。
+public class WeatherDataConvert {
+
+    public WeatherViewData convertData(WeatherData netData){
+
+        WeatherViewData viewData = new WeatherViewData();
+        if(null!=netData.getData()&&null!=netData.getData().getTemperature()){
+            viewData.setTemperature(netData.getData().getTemperature());
+        }else {
+            viewData.setTemperature(0.0);
+        }
+        if(null!=netData.getData()&&null!=netData.getData().getWeatherType()){
+            viewData.setWeatherType(netData.getData().getWeatherType());
+        }else {
+            viewData.setWeatherType(1);
+        }
+        if(null!=netData.getData()&&null!=netData.getData().getUltraviolet()){
+            viewData.setUltraviolet(netData.getData().getUltraviolet());
+        }else {
+            viewData.setUltraviolet(0);
+        }
+        if(null!=netData.getData()&&null!=netData.getData().getRainfall()){
+            viewData.setRainfall(netData.getData().getRainfall());
+        }else {
+            viewData.setRainfall("0");
+        }
+        if(null!=netData.getData()&&null!=netData.getData().getHourTemperature()){
+            viewData.setHourTemperature(netData.getData().getHourTemperature());
+        }else {
+            viewData.setHourTemperature("10");
+        }
+        if(null!=netData.getData()&&null!=netData.getData().getWindPower()){
+            viewData.setWindPower(netData.getData().getWindPower());
+        }else {
+            viewData.setWindPower("2");
+        }
+        return viewData;
+    }
+
+}
+   
+   
+
+
+
+
+
