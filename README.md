@@ -27,6 +27,8 @@
   同理由于robolectric需要从oss.sonatype.org下载一些必要的依赖包，但是oss.sonatype.org是国外的网站，下载速度感人。这里同样需要修改整个工程的build.gradle文件，不过这次是修改maven{}为阿里云的代理。
 
   gradle task使用方法如下图
-![](https://github.com/openhkr/EasyUtAndroid/blob/master/screenshots/jacoco_task.png）
+  
+  ![](https://github.com/openhkr/EasyUtAndroid/blob/master/screenshots/jacoco_task.png)
+
 
 
