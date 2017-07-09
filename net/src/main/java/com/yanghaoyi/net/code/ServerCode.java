@@ -1,7 +1,5 @@
 package com.yanghaoyi.net.code;
 
-import android.content.Context;
-
 /**
  * Author : YangHaoyi on 2017/7/7.
  * Email  :  yanghaoyi@neusoft.com
@@ -11,7 +9,7 @@ import android.content.Context;
  */
 
 public enum  ServerCode {
-    CODE_SUCCESS(100, ""),
+    CODE_SUCCESS(1000, ""),
     CODE_ERROR(999,"");
 
 

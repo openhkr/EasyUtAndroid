@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.yanghaoyi.easyutandroid.model.convert.WeatherDataConvert;
 import com.yanghaoyi.easyutandroid.presenter.listener.WeatherRequestListener;
 import com.yanghaoyi.net.ApiService;
-import com.yanghaoyi.net.RequestListener;
 import com.yanghaoyi.net.bean.WeatherData;
 import com.yanghaoyi.net.code.ServerCode;
 
@@ -80,7 +79,7 @@ public class WeatherModelTest {
         WeatherData result = captor.getValue();
         int status = result.getStatus();
         //验证参数捕获与模拟参数中code字段是否一致
-        assertEquals("验证code",status,100);
+        assertEquals("验证code",status,1000);
     }
 
     @Test
