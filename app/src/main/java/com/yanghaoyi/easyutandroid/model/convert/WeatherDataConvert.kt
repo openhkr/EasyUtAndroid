@@ -17,9 +17,9 @@ open class WeatherDataConvert {
         viewData.temperature = netData.data?.temperature?:0.0
         viewData.weatherType = netData.data?.weatherType?:0
         viewData.ultraviolet = netData.data?.ultraviolet?:0
-        viewData.rainfall = netData.data?.rainfall?:""
-        viewData.hourTemperature = netData.data?.hourTemperature?:""
-        viewData.windPower = netData.data?.windPower?:""
+        viewData.rainfall = netData.data?.rainfall?:"0"
+        viewData.hourTemperature = netData.data?.hourTemperature?:"10"
+        viewData.windPower = netData.data?.windPower?:"2"
         return  viewData
     }
 

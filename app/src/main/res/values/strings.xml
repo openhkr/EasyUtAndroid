@@ -10,6 +10,10 @@
     <string name="weather_high_bask">长袖衣物,上午十时至下午二时最好不要外出</string>
     <string name="weather_danger_bask">紫外线指数过高，不建议出行</string>
     <string name="weather_data_error">数据转换异常</string>
+    <string name="weather_temperature_24">24小时温度均值</string>
+    <string name="weather_rainfall_24">降雨量均值</string>
+    <string name="weather_wind_power_24">风力均值</string>
+
 
 
 </resources>

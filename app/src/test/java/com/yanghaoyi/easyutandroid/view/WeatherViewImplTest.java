@@ -168,7 +168,7 @@ public class WeatherViewImplTest {
         TextView tvHourTemperature = (TextView) activity.findViewById(R.id.tvHourTemperature);
         String text = tvHourTemperature.getText().toString();
         //验证文字显示
-        assertEquals("验证温度",text,"26");
+        assertEquals("验证温度",text,"24小时温度均值26");
     }
 
     @Test
@@ -183,7 +183,7 @@ public class WeatherViewImplTest {
         TextView tvPrecipitation = (TextView) activity.findViewById(R.id.tvPrecipitation);
         String text = tvPrecipitation.getText().toString();
         //验证文字显示
-        assertEquals("验证降雨量",text,"30");
+        assertEquals("验证降雨量",text,"降雨量均值30");
     }
 
     @Test
@@ -198,7 +198,7 @@ public class WeatherViewImplTest {
         TextView tvWindPower = (TextView) activity.findViewById(R.id.tvWindPower);
         String text = tvWindPower.getText().toString();
         //验证文字显示
-        assertEquals("验证风力",text,"5");
+        assertEquals("验证风力",text,"风力均值5");
     }
 
     @Test
@@ -213,9 +213,9 @@ public class WeatherViewImplTest {
         String precipitation = tvPrecipitation.getText().toString();
         String windPower = tvWindPower.getText().toString();
         //验证文字显示
-        assertEquals("验证温度",hourTemperature,"");
-        assertEquals("验证降雨量",precipitation,"");
-        assertEquals("验证风力",windPower,"");
+        assertEquals("验证温度",hourTemperature,"24小时温度均值");
+        assertEquals("验证降雨量",precipitation,"降雨量均值");
+        assertEquals("验证风力",windPower,"风力均值");
     }
 
 

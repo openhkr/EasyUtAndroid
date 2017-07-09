@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -56,7 +55,7 @@ public class WeatherModel extends AbstractBaasModel{
                         if(netData.getStatus()== ServerCode.CODE_SUCCESS.getCode()){
                             listener.success(convert.convertData(netData));
                         }else {
-                            listener.fail(null,ServerCode.get(netData.getStatus()).getMessage());
+                            listener.fail(convert.convertData(netData),ServerCode.get(netData.getStatus()).getMessage());
                         }
                     }
                 });

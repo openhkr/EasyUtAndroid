@@ -13,7 +13,7 @@ public class WeatherControlFactory {
 
     private WeatherControl control;
     public WeatherControlFactory build(IWeatherView view){
-        WeatherControl control = new WeatherControl(view);
+        control = new WeatherControl(view);
         return this;
     }
 

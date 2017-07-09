@@ -127,7 +127,7 @@ public class WeatherDataConvertTest {
         WeatherData.DataBean dataBean = new WeatherData.DataBean();
         netData.setData(dataBean);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证降雨量为空",viewData.getRainfall(),"");
+        assertEquals("验证降雨量为空",viewData.getRainfall(),"0");
     }
 
     @Test
@@ -135,7 +135,7 @@ public class WeatherDataConvertTest {
         WeatherData netData = new WeatherData();
         netData.setData(null);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证降雨量为空",viewData.getRainfall(),"");
+        assertEquals("验证降雨量为空",viewData.getRainfall(),"0");
     }
 
     @Test
@@ -154,14 +154,14 @@ public class WeatherDataConvertTest {
         WeatherData.DataBean dataBean = new WeatherData.DataBean();
         netData.setData(dataBean);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证小时温度为空",viewData.getHourTemperature(),"");
+        assertEquals("验证小时温度为空",viewData.getHourTemperature(),"10");
     }
     @Test
     public void testHourTemperatureCauseNull(){
         WeatherData netData = new WeatherData();
         netData.setData(null);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证小时温度为空",viewData.getHourTemperature(),"");
+        assertEquals("验证小时温度为空",viewData.getHourTemperature(),"10");
     }
 
     @Test
@@ -180,14 +180,14 @@ public class WeatherDataConvertTest {
         WeatherData.DataBean dataBean = new WeatherData.DataBean();
         netData.setData(dataBean);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证风力为空",viewData.getWindPower(),"");
+        assertEquals("验证风力为空",viewData.getWindPower(),"2");
     }
     @Test
     public void testWindPowerCauseNull(){
         WeatherData netData = new WeatherData();
         netData.setData(null);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证风力为空",viewData.getWindPower(),"");
+        assertEquals("验证风力为空",viewData.getWindPower(),"2");
     }
 
 

@@ -115,27 +115,27 @@ public class WeatherViewImpl implements IWeatherView{
     @Override
     public void showHourTemperature() {
         //显示实时温度详情
-        mViewHolder.getTvHourTemperature().setText(mViewDataCache.getHourTemperature());
+        mViewHolder.getTvHourTemperature().setText(mContext.getString(R.string.weather_temperature_24)+mViewDataCache.getHourTemperature());
     }
 
     @Override
     public void showPrecipitation() {
         //显示实时降水量详情
-        mViewHolder.getTvPrecipitation().setText(mViewDataCache.getRainfall());
+        mViewHolder.getTvPrecipitation().setText(mContext.getString(R.string.weather_rainfall_24)+mViewDataCache.getRainfall());
     }
 
     @Override
     public void showWindPower() {
         //显示实时风力详情
-        mViewHolder.getTvWindPower().setText(mViewDataCache.getWindPower());
+        mViewHolder.getTvWindPower().setText(mContext.getString(R.string.weather_wind_power_24)+mViewDataCache.getWindPower());
     }
 
     @Override
     public void resetCommandTab() {
         //重置控制面板文字显示
-        mViewHolder.getTvHourTemperature().setText(mContext.getString(R.string.weather_empty));
-        mViewHolder.getTvPrecipitation().setText(mContext.getString(R.string.weather_empty));
-        mViewHolder.getTvWindPower().setText(mContext.getString(R.string.weather_empty));
+        mViewHolder.getTvHourTemperature().setText(mContext.getString(R.string.weather_temperature_24));
+        mViewHolder.getTvPrecipitation().setText(mContext.getString(R.string.weather_rainfall_24));
+        mViewHolder.getTvWindPower().setText(mContext.getString(R.string.weather_wind_power_24));
     }
 
     @Override
