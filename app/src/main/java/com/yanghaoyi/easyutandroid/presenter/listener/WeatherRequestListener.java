@@ -33,7 +33,7 @@ public class WeatherRequestListener implements RequestListener<WeatherViewData> 
 
     @Override
     public void fail(WeatherViewData response, String msg) {
-
+        view.hideLoading();
     }
 
     @Override
