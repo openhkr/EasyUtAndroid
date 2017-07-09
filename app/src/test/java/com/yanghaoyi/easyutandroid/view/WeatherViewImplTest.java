@@ -12,15 +12,20 @@ import com.yanghaoyi.easyutandroid.view.data.WeatherViewData;
 import com.yanghaoyi.easyutandroid.view.holder.WeatherViewHolder;
 import com.yanghaoyi.easyutandroid.view.impl.WeatherViewImpl;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.robolectric.Robolectric;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowTextView;
 import org.robolectric.shadows.ShadowToast;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Author : YangHaoyi on 2017/6/27.
@@ -31,6 +36,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(MyRobolectricTestRunner.class)
 @Config(constants = BuildConfig.class,sdk = 24)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WeatherViewImplTest {
 
     private WeatherActivity activity;
@@ -60,65 +66,79 @@ public class WeatherViewImplTest {
         assertEquals("数据转换异常", ShadowToast.getTextOfLatestToast());
     }
 
+
+
+
+    /**
+     *
+     * Notice :对于多个函数操作同一个TextView的情况使用testDressGlass() case的方法会发生异常
+     *         现象为多个case 互相影响，第一个case对TextView赋值，第二个再赋值验证的时候会取到
+     *         第一个case的值，单个case 100%运行成功，多个case同时执行会有5%的几率产生相互影响
+     *         事件。尝试Junit自带的 @After tearDown()方法未见明显效果，采用
+     *         @FixMethodOrder(MethodSorters.NAME_ASCENDING) 来固定case执行顺序解决相互
+     *         影响问题。
+     *
+     * **/
+
     @Test
     public void testShowSunny(){
-        view.showSunny();
         TextView sunny = (TextView) activity.findViewById(R.id.tvWeather);
-        String text = sunny.getText().toString();
-        assertEquals("验证晴天显示",text,"晴天");
+        view.showSunny();
+        ShadowTextView stv = Shadows.shadowOf(sunny);
+        assertEquals("验证晴天显示",stv.innerText(),"晴天");
     }
 
     @Test
     public void testShowRainy(){
-        view.showRainy();
         TextView rainy = (TextView) activity.findViewById(R.id.tvWeather);
-        String text = rainy.getText().toString();
-        assertEquals("验证雨天显示",text,"雨天");
+        view.showRainy();
+        ShadowTextView stv = Shadows.shadowOf(rainy);
+        assertEquals("验证雨天显示",stv.innerText(),"雨天");
     }
 
     @Test
     public void testShowCloudy(){
-        view.showCloudy();
         TextView cloudy = (TextView) activity.findViewById(R.id.tvWeather);
-        String text = cloudy.getText().toString();
-        assertEquals("验证多云显示",text,"多云");
+        view.showCloudy();
+        ShadowTextView stv = Shadows.shadowOf(cloudy);
+        assertEquals("验证多云显示",stv.innerText(),"多云");
     }
 
     @Test
     public void testShowLightBaskNotice(){
-        view.showLightBaskNotice();
         TextView lightBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        String text = lightBask.getText().toString();
-        assertEquals("验证轻度紫外线",text,"紫外线指数良好");
+        view.showLightBaskNotice();
+        ShadowTextView stv = Shadows.shadowOf(lightBask);
+        assertEquals("验证轻度紫外线",stv.innerText(),"紫外线指数良好");
     }
 
     @Test
     public void testShowMiddleBaskNotice(){
-        view.showMiddleBaskNotice();
         TextView middleBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        String text = middleBask.getText().toString();
-        assertEquals("验证中度紫外线",text,"太阳眼镜,尽量躲在阴凉处");
+        view.showMiddleBaskNotice();
+        ShadowTextView stv = Shadows.shadowOf(middleBask);
+        assertEquals("验证中度紫外线",stv.innerText(),"太阳眼镜,尽量躲在阴凉处");
     }
 
     @Test
     public void testShowHighBaskNotice(){
-        view.showHighBaskNotice();
         TextView highBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        String text = highBask.getText().toString();
-        assertEquals("验证重度紫外线",text,"太阳眼镜,尽量躲在阴凉处");
+        view.showHighBaskNotice();
+        ShadowTextView stv = Shadows.shadowOf(highBask);
+        assertEquals("验证重度紫外线",stv.innerText(),"长袖衣物,上午十时至下午二时最好不要外出");
     }
 
     @Test
     public void testShowBaskDanger(){
-        //执行待验证方法
-        view.showBaskDanger();
         //通过Id找到View实体
         TextView dangerBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        //获取TextView的文字
-        String text = dangerBask.getText().toString();
+        //执行待验证方法
+        view.showBaskDanger();
+        ShadowTextView stv = Shadows.shadowOf(dangerBask);
         //验证TextView的文字显示
-        assertEquals("验证危险紫外线",text,"紫外线指数过高，不建议出行");
+        assertEquals("验证危险紫外线",stv.innerText(),"紫外线指数过高，不建议出行");
     }
+
     @Test
     public void testDressLongSleeve(){
         //执行待验证方法
@@ -225,5 +245,14 @@ public class WeatherViewImplTest {
         assertEquals("验证返回城市",city,"沈阳");
     }
 
+
+    @After
+    public void tearDown(){
+        activity.finish();
+        TextView tvWeather = (TextView) activity.findViewById(R.id.tvWeather);
+        tvWeather.setText("");
+        TextView tvBaskNotice = (TextView) activity.findViewById(R.id.tvBaskNotice);
+        tvBaskNotice.setText("");
+    }
 
 }

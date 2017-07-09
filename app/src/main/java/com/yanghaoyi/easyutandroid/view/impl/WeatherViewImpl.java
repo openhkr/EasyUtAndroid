@@ -87,7 +87,7 @@ public class WeatherViewImpl implements IWeatherView{
 
     @Override
     public void showHighBaskNotice() {
-        mViewHolder.getTvBaskNotice().setText(R.string.weather_middle_bask);
+        mViewHolder.getTvBaskNotice().setText(R.string.weather_high_bask);
     }
 
     @Override

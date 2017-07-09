@@ -52,4 +52,11 @@ public class WeatherRequestListenerTest {
 
     }
 
+    @Test
+    public void testFail(){
+        listener.fail(null,"");
+        verify(view).hideLoading();
+        verify(view).updateCache(null);
+    }
+
 }
