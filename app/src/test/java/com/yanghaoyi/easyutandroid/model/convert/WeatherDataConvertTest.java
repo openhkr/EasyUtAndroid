@@ -63,10 +63,10 @@ public class WeatherDataConvertTest {
     public void testWeatherType(){
         WeatherData netData = new WeatherData();
         WeatherData.DataBean dataBean = new WeatherData.DataBean();
-        dataBean.setWeatherType(1);
+        dataBean.setWeatherType(2);
         netData.setData(dataBean);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证天气类型不为空",viewData.getWeatherType(),1);
+        assertEquals("验证天气类型不为空",viewData.getWeatherType(),2);
     }
     @Test
     public void testWeatherTypeNull(){
@@ -74,7 +74,7 @@ public class WeatherDataConvertTest {
         WeatherData.DataBean dataBean = new WeatherData.DataBean();
         netData.setData(dataBean);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证天气类型为空",viewData.getWeatherType(),0);
+        assertEquals("验证天气类型为空",viewData.getWeatherType(),1);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class WeatherDataConvertTest {
         WeatherData netData = new WeatherData();
         netData.setData(null);
         WeatherViewData viewData = convert.convertData(netData);
-        assertEquals("验证天气类型为空",viewData.getWeatherType(),0);
+        assertEquals("验证天气类型为空",viewData.getWeatherType(),1);
     }
 
     @Test

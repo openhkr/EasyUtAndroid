@@ -15,7 +15,7 @@ open class WeatherDataConvert {
     open fun convertData(netData: WeatherData):WeatherViewData{
         val viewData = WeatherViewData()
         viewData.temperature = netData.data?.temperature?:0.0
-        viewData.weatherType = netData.data?.weatherType?:0
+        viewData.weatherType = netData.data?.weatherType?:1
         viewData.ultraviolet = netData.data?.ultraviolet?:0
         viewData.rainfall = netData.data?.rainfall?:"0"
         viewData.hourTemperature = netData.data?.hourTemperature?:"10"
