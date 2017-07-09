@@ -32,12 +32,16 @@
 
 
 
-问题反馈回执：
+问题反馈回执：   
+
    感谢Jaggerer同学的反馈，为了响应谷歌kotlin第一开发言语的号召，同时也因为java8 Optional需要api 24以致无法广泛推广等原因，工程中对数据判空类
-WeatherDataConvert参与了kontlin编写，愿意尝试kontlin的同学可以使用Android Studio下载Kotlin相关插件
-   执行 Settings -> plugins -> BrowseRepositories中搜索“Kotlin”
-   暂时还不愿意下载插件的同学可以将WeatherDataConvert转成java文件以使用。
-public class WeatherDataConvert {
+WeatherDataConvert参与了kontlin编写，愿意尝试kontlin的同学可以使用Android Studio下载Kotlin相关插件    
+
+   执行 Settings -> plugins -> BrowseRepositories中搜索“Kotlin”   
+   
+   暂时还不愿意下载插件的同学可以将WeatherDataConvert转成java文件以使用。    
+   
+ public class WeatherDataConvert {
 
     public WeatherViewData convertData(WeatherData netData){
 
