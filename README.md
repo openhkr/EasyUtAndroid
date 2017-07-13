@@ -32,6 +32,71 @@
 
 
 
+   对于私有变量private的测试
+
+  //因为提示框 dialog 在 view 中属于私有变量，不需要对外暴露方法，如果为了测试而写一个get set 方法似乎太过牵强
+  //所以采用 Java 反射的方法获取dialog对象
+   
+   
+        view.showTelDialog();
+        try {
+            // /通过类的字节码得到该类中声明的所有属性，无论私有或公有
+            Field field = WeatherHelpCenterImpl.class.getDeclaredField("telDialog");
+            // 设置访问权限（这点对于有过android开发经验的可以说很熟悉）
+            field.setAccessible(true);
+            // 得到私有的变量值
+            Object dialog = field.get(view);
+            TConfirmDialog telDialog = (TConfirmDialog) dialog;
+
+            //获取到Dialog对象之后，再通过反射获取Dialog中TextView对象
+            Field fieldDialog = TConfirmDialog.class.getDeclaredField("tvTitle");
+            // 设置访问权限
+            fieldDialog.setAccessible(true);
+            //获取telDialog中的TextView对象
+            Object title = fieldDialog.get(telDialog);
+            TextView tvTitle = (TextView) title;
+            //通过assert方法验证标题
+            assertEquals("验证标题",tvTitle.getText().toString(),"客服电话");
+
+            //获取到Dialog对象之后，再通过反射获取Dialog中TextView对象
+            fieldDialog = TConfirmDialog.class.getDeclaredField("tvConfirm");
+            //获取telDialog中的TextView对象
+            Object confirm = fieldDialog.get(telDialog);
+            TextView tvConfirm = (TextView) confirm;
+            //通过assert方法验证标题
+            assertEquals("验证确定按钮",tvConfirm.getText().toString(),"拨打电话");
+
+            //获取到Dialog对象之后，再通过反射获取Dialog中TextView对象
+            fieldDialog = TConfirmDialog.class.getDeclaredField("tvCancel");
+            //获取telDialog中的TextView对象
+            Object cancel = fieldDialog.get(telDialog);
+            TextView tvCancel = (TextView) cancel;
+            //通过assert方法验证标题
+            assertEquals("验证取消按钮",tvCancel.getText().toString(),"取消");
+
+
+        } catch (Exception e) {
+            //error
+        }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 问题反馈回执：   
 
    感谢Jaggerer同学的反馈，为了响应谷歌kotlin第一开发言语的号召，同时也因为java8 Optional需要api 24以致无法广泛推广等原因，工程中对数据判空类
@@ -80,9 +145,6 @@ WeatherDataConvert参与了kontlin编写，愿意尝试kontlin的同学可以使
     }
 
 }
-   
-   
-
 
 
 
