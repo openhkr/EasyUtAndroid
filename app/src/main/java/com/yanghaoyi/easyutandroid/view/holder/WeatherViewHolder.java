@@ -24,6 +24,7 @@ public class WeatherViewHolder{
     private TextView tvHourTemperature;
     private TextView tvPrecipitation;
     private TextView tvWindPower;
+    private TextView btHelp;
     private PeopleView vPeople;
 
     public WeatherViewHolder(WeatherActivity activity) {
@@ -35,6 +36,7 @@ public class WeatherViewHolder{
         tvHourTemperature = (TextView) activity.findViewById(R.id.tvHourTemperature);
         tvPrecipitation = (TextView) activity.findViewById(R.id.tvPrecipitation);
         tvWindPower = (TextView) activity.findViewById(R.id.tvWindPower);
+        btHelp = (TextView) activity.findViewById(R.id.btHelp);
     }
 
     public FrameLayout getRoom() {
@@ -66,5 +68,9 @@ public class WeatherViewHolder{
 
     public TextView getTvWindPower() {
         return tvWindPower;
+    }
+
+    public TextView getBtHelp() {
+        return btHelp;
     }
 }

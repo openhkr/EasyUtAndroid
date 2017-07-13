@@ -1,5 +1,6 @@
 package com.yanghaoyi.easyutandroid.view;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -7,12 +8,13 @@ import com.yanghaoyi.easyutandroid.BuildConfig;
 import com.yanghaoyi.easyutandroid.MyRobolectricTestRunner;
 import com.yanghaoyi.easyutandroid.R;
 import com.yanghaoyi.easyutandroid.view.activity.WeatherActivity;
+import com.yanghaoyi.easyutandroid.view.activity.WeatherHelpCenterActivity;
 import com.yanghaoyi.easyutandroid.view.comp.PeopleView;
 import com.yanghaoyi.easyutandroid.view.data.WeatherViewData;
 import com.yanghaoyi.easyutandroid.view.holder.WeatherViewHolder;
 import com.yanghaoyi.easyutandroid.view.impl.WeatherViewImpl;
 
-import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,6 +23,7 @@ import org.junit.runners.MethodSorters;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowTextView;
 import org.robolectric.shadows.ShadowToast;
 
@@ -67,42 +70,18 @@ public class WeatherViewImplTest {
     }
 
 
-
-
-    /**
-     *
-     * Notice :对于多个函数操作同一个TextView的情况使用testDressGlass() case的方法会发生异常
-     *         现象为多个case 互相影响，第一个case对TextView赋值，第二个再赋值验证的时候会取到
-     *         第一个case的值，单个case 100%运行成功，多个case同时执行会有5%的几率产生相互影响
-     *         事件。尝试Junit自带的 @After tearDown()方法未见明显效果，采用
-     *         @FixMethodOrder(MethodSorters.NAME_ASCENDING) 来固定case执行顺序解决相互
-     *         影响问题。
-     *
-     * **/
-
     @Test
-    public void testShowSunny(){
+    public void testShowWeather(){
         TextView sunny = (TextView) activity.findViewById(R.id.tvWeather);
         view.showSunny();
         ShadowTextView stv = Shadows.shadowOf(sunny);
         assertEquals("验证晴天显示",stv.innerText(),"晴天");
-    }
-
-    @Test
-    public void testShowRainy(){
-        TextView rainy = (TextView) activity.findViewById(R.id.tvWeather);
         view.showRainy();
-        ShadowTextView stv = Shadows.shadowOf(rainy);
         assertEquals("验证雨天显示",stv.innerText(),"雨天");
-    }
-
-    @Test
-    public void testShowCloudy(){
-        TextView cloudy = (TextView) activity.findViewById(R.id.tvWeather);
         view.showCloudy();
-        ShadowTextView stv = Shadows.shadowOf(cloudy);
         assertEquals("验证多云显示",stv.innerText(),"多云");
     }
+
 
     @Test
     public void testShowLightBaskNotice(){
@@ -110,32 +89,11 @@ public class WeatherViewImplTest {
         view.showLightBaskNotice();
         ShadowTextView stv = Shadows.shadowOf(lightBask);
         assertEquals("验证轻度紫外线",stv.innerText(),"紫外线指数良好");
-    }
-
-    @Test
-    public void testShowMiddleBaskNotice(){
-        TextView middleBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
         view.showMiddleBaskNotice();
-        ShadowTextView stv = Shadows.shadowOf(middleBask);
         assertEquals("验证中度紫外线",stv.innerText(),"太阳眼镜,尽量躲在阴凉处");
-    }
-
-    @Test
-    public void testShowHighBaskNotice(){
-        TextView highBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
         view.showHighBaskNotice();
-        ShadowTextView stv = Shadows.shadowOf(highBask);
         assertEquals("验证重度紫外线",stv.innerText(),"长袖衣物,上午十时至下午二时最好不要外出");
-    }
-
-    @Test
-    public void testShowBaskDanger(){
-        //通过Id找到View实体
-        TextView dangerBask = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        //执行待验证方法
         view.showBaskDanger();
-        ShadowTextView stv = Shadows.shadowOf(dangerBask);
-        //验证TextView的文字显示
         assertEquals("验证危险紫外线",stv.innerText(),"紫外线指数过高，不建议出行");
     }
 
@@ -245,14 +203,15 @@ public class WeatherViewImplTest {
         assertEquals("验证返回城市",city,"沈阳");
     }
 
-
-    @After
-    public void tearDown(){
-        activity.finish();
-        TextView tvWeather = (TextView) activity.findViewById(R.id.tvWeather);
-        tvWeather.setText("");
-        TextView tvBaskNotice = (TextView) activity.findViewById(R.id.tvBaskNotice);
-        tvBaskNotice.setText("");
+    @Test
+    public void testToHelpCenter(){
+        view.toHelpCenter();
+        //设置期待Intent
+        Intent expectedIntent = new Intent(activity, WeatherHelpCenterActivity.class);
+        //获取实际Intent
+        Intent actualIntent = ShadowApplication.getInstance().getNextStartedActivity();
+        //通过Assert验证
+        Assert.assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
     }
 
 }

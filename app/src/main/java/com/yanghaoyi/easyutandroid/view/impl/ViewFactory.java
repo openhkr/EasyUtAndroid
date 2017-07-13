@@ -1,9 +1,8 @@
 package com.yanghaoyi.easyutandroid.view.impl;
 
-import android.content.Context;
-
 import com.yanghaoyi.easyutandroid.view.IViewUpdater;
 import com.yanghaoyi.easyutandroid.view.IWeatherView;
+import com.yanghaoyi.easyutandroid.view.activity.WeatherActivity;
 import com.yanghaoyi.easyutandroid.view.holder.WeatherViewHolder;
 
 /**
@@ -17,7 +16,7 @@ public class ViewFactory {
 
     private IWeatherView view;
 
-    public ViewFactory build(WeatherViewHolder viewHolder, Context context){
+    public ViewFactory build(WeatherViewHolder viewHolder, WeatherActivity context){
         view = new WeatherViewImpl(viewHolder,context);
         return this;
     }

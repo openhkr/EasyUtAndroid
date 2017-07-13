@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -148,7 +149,15 @@ public class WeatherModelTest {
         model.setApiService(api);
         //Set the mock object into test class.
         //将mock对象赋值给待测类
-        model.setConvert(convertData);
+        try {
+            Field field = WeatherModel.class.getDeclaredField("convert");
+            field.setAccessible(true);
+            field.set(model, convertData);
+        } catch (Exception e) {
+            //no use
+        }
+
+
         //Verify parameters if queryMap.city isn't equals "沈阳",this case will be fail.
         //验证请求参数“沈阳”的一致性
         queryMap = new HashMap<>();

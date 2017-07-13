@@ -6,7 +6,6 @@ import com.yanghaoyi.easyutandroid.BuildConfig;
 import com.yanghaoyi.easyutandroid.MyRobolectricTestRunner;
 import com.yanghaoyi.easyutandroid.R;
 import com.yanghaoyi.easyutandroid.presenter.WeatherPresenter;
-import com.yanghaoyi.easyutandroid.view.holder.WeatherViewHolder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +64,17 @@ public class WeatherActivityTest {
         //验证点击事件执行情况
         verify(presenter).showWindPower();
     }
+
+    @Test
+    public void testHelpCenter(){
+        TextView btHelp = (TextView) activity.findViewById(R.id.btHelp);
+        //执行view点击方法
+        btHelp.performClick();
+        //验证点击事件执行情况
+        verify(presenter).toHelpCenter();
+    }
+
+
 
     @Test
     public void testOnDestroy(){

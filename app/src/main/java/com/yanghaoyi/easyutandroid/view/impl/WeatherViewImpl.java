@@ -1,6 +1,6 @@
 package com.yanghaoyi.easyutandroid.view.impl;
 
-import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.yanghaoyi.base.comp.LoadingView;
 import com.yanghaoyi.easyutandroid.R;
 import com.yanghaoyi.easyutandroid.view.IWeatherView;
+import com.yanghaoyi.easyutandroid.view.activity.WeatherActivity;
+import com.yanghaoyi.easyutandroid.view.activity.WeatherHelpCenterActivity;
 import com.yanghaoyi.easyutandroid.view.data.WeatherViewData;
 import com.yanghaoyi.easyutandroid.view.holder.WeatherViewHolder;
 
@@ -24,12 +26,12 @@ public class WeatherViewImpl implements IWeatherView{
 
 
     private FrameLayout room;
-    private Context mContext;
+    private WeatherActivity mContext;
     private WeatherViewHolder mViewHolder;
     private WeatherViewData mViewDataCache;
     private View cover;
 
-    public WeatherViewImpl(WeatherViewHolder viewHolder, Context context) {
+    public WeatherViewImpl(WeatherViewHolder viewHolder, WeatherActivity context) {
         this.mContext = context;
         this.mViewHolder = viewHolder;
         room = viewHolder.getRoom();
@@ -118,6 +120,8 @@ public class WeatherViewImpl implements IWeatherView{
         mViewHolder.getTvHourTemperature().setText(mContext.getString(R.string.weather_temperature_24)+mViewDataCache.getHourTemperature());
     }
 
+
+
     @Override
     public void showPrecipitation() {
         //显示实时降水量详情
@@ -142,5 +146,11 @@ public class WeatherViewImpl implements IWeatherView{
     public String getLocationCity() {
         //获取定位城市（真实情况下应该通过SDK进行定位获取，因为这只是一个Demo，故返回固定值“沈阳”）
         return mContext.getString(R.string.weather_location);
+    }
+
+    @Override
+    public void toHelpCenter() {
+        Intent intent = new Intent(mContext, WeatherHelpCenterActivity.class);
+        mContext.startActivity(intent);
     }
 }

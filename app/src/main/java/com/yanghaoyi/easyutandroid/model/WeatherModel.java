@@ -66,8 +66,4 @@ public class WeatherModel extends AbstractBaasModel{
     public void cancelRequest(){
         subscription.unsubscribe();
     }
-
-    public void setConvert(WeatherDataConvert convert) {
-        this.convert = convert;
-    }
 }

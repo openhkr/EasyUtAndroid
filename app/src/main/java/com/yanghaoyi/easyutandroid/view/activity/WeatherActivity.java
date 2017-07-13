@@ -46,6 +46,7 @@ public class WeatherActivity extends FragmentActivity implements IPresenterUpdat
         viewHolder.getTvHourTemperature().setOnClickListener(view->presenter.showHourTemperature());
         viewHolder.getTvPrecipitation().setOnClickListener(view -> presenter.showPrecipitation());
         viewHolder.getTvWindPower().setOnClickListener(view -> presenter.showWindPower());
+        viewHolder.getBtHelp().setOnClickListener(view -> presenter.toHelpCenter());
     }
 
     @Override

@@ -13,7 +13,11 @@
     <string name="weather_temperature_24">24小时温度均值</string>
     <string name="weather_rainfall_24">降雨量均值</string>
     <string name="weather_wind_power_24">风力均值</string>
-
+    <string name="weather_help_center">帮助中心</string>
+    <string name="weather_help_tel">客服电话</string>
+    <string name="weather_help_tel_sure">拨打电话</string>
+    <string name="weather_help_tel_cancel">取消</string>
+    <string name="weather_teling">电话拨打中。。。</string>
 
 
 </resources>

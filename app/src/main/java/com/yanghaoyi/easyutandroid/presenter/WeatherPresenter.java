@@ -52,6 +52,10 @@ public class WeatherPresenter implements IModelUpdater,IControlUpdater, IListene
         weatherControl.buttonWasPressed(WeatherControl.WINDPOWER);
     }
 
+    public void toHelpCenter(){
+        view.toHelpCenter();
+    }
+
 
     @Override
     public void updateWeatherModel(WeatherModel model) {

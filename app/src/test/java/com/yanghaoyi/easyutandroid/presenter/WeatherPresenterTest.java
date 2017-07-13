@@ -72,4 +72,10 @@ public class WeatherPresenterTest {
         verify(control).buttonWasPressed(WeatherControl.WINDPOWER);
     }
 
+    @Test
+    public void testToHelpCenter(){
+        presenter.toHelpCenter();
+        verify(view).toHelpCenter();
+    }
+
 }

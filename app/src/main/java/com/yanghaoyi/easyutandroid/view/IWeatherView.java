@@ -35,6 +35,7 @@ public interface IWeatherView {
     void showWindPower();
     void resetCommandTab();
     void showHourTemperature();
+    void toHelpCenter();
 
     String getLocationCity();
 }
