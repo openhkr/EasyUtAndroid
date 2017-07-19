@@ -9,10 +9,14 @@ import com.yanghaoyi.net.code.ServerCode;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,17 +35,21 @@ import static org.mockito.Mockito.verify;
  * Change : YangHaoYi on 2017/6/30.
  * Version : V 1.0
  */
+@RunWith(MockitoJUnitRunner.class)
 public class WeatherModelTest {
 
+    private WeatherModel model;
+
+    @Mock
+    ApiService api;
+    @Mock
+    WeatherDataConvert convertData;
+    @Mock
+    WeatherRequestListener listener;
 
     private static final String JSON_ROOT_PATH = "/json/";
     private String jsonFullPath;
-
-    private ApiService api;
-    private WeatherModel model;
     private WeatherData netData;
-    private WeatherDataConvert convertData;
-    private WeatherRequestListener listener;
     private Map<String, String> queryMap;
 
 
@@ -49,15 +57,33 @@ public class WeatherModelTest {
     public void setUp(){
         //Rx工具类把异步变成同步，方便测试
         RxUnitTestTools.openRxTools();
-        api = mock(ApiService.class);
-        convertData = mock(WeatherDataConvert.class);
-        listener = Mockito.mock(WeatherRequestListener.class);
         model = new WeatherModel();
     }
 
 
 
     @Test
+    @SuppressWarnings("unchecked")
+    public void testParams(){
+        model.request(listener,"沈阳");
+        try {
+            Field fieldParam = WeatherModel.class.getDeclaredField("queryMap");
+            Field fieldKey = WeatherModel.class.getDeclaredField("CITY");
+            fieldParam.setAccessible(true);
+            setFinalStatic(fieldKey, true);
+            Map<String, String> queryMaps = (Map<String, String>) fieldParam.get(model);
+            String key = (String) fieldKey.get(model);
+            assertEquals("验证queryMap的Key",key,"city");
+            String city = queryMaps.get("city");
+            assertEquals("验证queryMap的value",city,"沈阳");
+        } catch (Exception e) {
+            //no use
+        }
+    }
+
+
+    @Test
+    @SuppressWarnings("unchecked")
     public void testRequestSuccess(){
         //Initialize the Api call back data.
         //初始化模拟Api返回数据
@@ -66,9 +92,9 @@ public class WeatherModelTest {
         //设定模拟规则，当Api发送getWeather请求，返回预先模拟的返回结构体
         Mockito.when(api.getWeather(queryMap)).thenReturn(Observable.just(netData));
         ArgumentCaptor<WeatherData> captor = ArgumentCaptor.forClass(WeatherData.class);
+        model.request(listener,"沈阳");
         //Execute the method
         //执行测试函数
-        model.request(listener,"沈阳");
         Mockito.verify(api).getWeather(queryMap);
         //验证显示加载进度条是否得到了调用
         Mockito.verify(listener).showLoading();
@@ -156,8 +182,6 @@ public class WeatherModelTest {
         } catch (Exception e) {
             //no use
         }
-
-
         //Verify parameters if queryMap.city isn't equals "沈阳",this case will be fail.
         //验证请求参数“沈阳”的一致性
         queryMap = new HashMap<>();
@@ -166,4 +190,14 @@ public class WeatherModelTest {
     private String getResponseString(String fileName) {
         return FileUtil.readFile(jsonFullPath + fileName, "UTF-8").toString();
     }
+
+    private void setFinalStatic(Field field, Object newValue) throws Exception {
+        field.setAccessible(true);
+
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+    }
+
+
 }

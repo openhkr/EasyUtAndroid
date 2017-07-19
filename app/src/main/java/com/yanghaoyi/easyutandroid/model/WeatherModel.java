@@ -27,13 +27,14 @@ public class WeatherModel extends AbstractBaasModel{
 
     private static final String CITY = "city";
     private WeatherDataConvert convert;
+    private Map<String, String> queryMap;
 
     public WeatherModel() {
         convert = new WeatherDataConvert();
+        queryMap = new HashMap<>();
     }
 
     public void request(final RequestListener<WeatherViewData> listener, String cityName) {
-        Map<String, String> queryMap = new HashMap<>();
         queryMap.put(CITY,cityName);
         listener.showLoading();
         subscription = apiService.getWeather(queryMap)
